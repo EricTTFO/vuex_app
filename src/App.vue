@@ -8,14 +8,27 @@
     <!-- mutations -->
     <span>{{ count }}</span>
 
-    <button @click="decrement({ amout: 1 })">-</button>
+    <button @click="decrementCountAsync({ amout: 1 })">-</button>
+    <!-- <button @click="decrement({ amout: 1 })">-</button> -->
     
-    <button @click="increment">+</button>
+    <button @click="incrementCountAsync">+</button>
+    <!-- <button @click="increment">+</button> -->
+
+    <!-- fetchTodos -->
+    <br>
+    <br>
+    <dir>{{ completedTodos }}</dir>
+
+    <button @click="fetchTodos">Get</button>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+
+//getters 更改数据
+//mutations 同步数据
+//action 异步数据
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "app",
   components: {},
@@ -23,19 +36,31 @@ export default {
     "count",
     "completedTodos",
     "completedTodosCount",
-    "getTodosById"
+    "getTodosById",
+    
   ]),
-  methods: {
-    increment(){
-      // console.log(1);
-      //触发mutation里面的方法
-      this.$store.commit('incrementCount');
-    },
-    decrement(n){
-      // console.log(0);
-      this.$store.commit('decrementCount', n)
-    }
-  }
+  // methods: mapMutations(['incrementCount','decrementCount'])
+
+  methods: mapActions(['incrementCountAsync','decrementCountAsync','fetchTodos',''])
+  // 复杂
+  // methods: {
+  //   increment(){
+  //     // console.log(1);
+  //     //触发mutation里面的方法
+  //     // this.$store.commit('incrementCount');
+  //     this.$store.dispatch('incrementCountAsync')
+  //   },
+  //   decrement(n){
+  //     // console.log(0);
+  //     // this.$store.commit('decrementCount', n)
+  //     this.$store.dispatch('decrementCountAsync',n)
+  //   },
+  //   fetchTodos(){
+  //     this.$store.dispatch('fetchTodos')
+  //   }
+  // }
+
+  // getters & mapGetter
   // computed: {
   //   count(){
   //     return this.$store.getters.count;
