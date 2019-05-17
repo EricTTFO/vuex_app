@@ -31,14 +31,13 @@ const mutations = {
     setTodos: (state,todos) => (state.todos = todos)
 }
 const actions = {
-
     //当前函数属于异步请求
     //es7提供的异步方法
     async fetchTodos({ commit }){
         //await 执行完后面的才能执行接下来的
         const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
         console.log(response);
-        commit('setTodos', response.data)
+        commit('setTodos', response.data);
       }
 }
 export default {
